@@ -26,19 +26,20 @@ namespace HeyChat.Controllers
             string typer        = Request.Form["typer"];
             string socket_id    = Request.Form["socket_id"];
 
+
 			var options = new PusherOptions();
-			options.Cluster = "mt1";
+			options.Cluster = "PUSHER_APP_CLUSTER";
 
 			var pusher = new Pusher(
-			"344451",
-	        "913866e45b4b1e9daf1a",
-	        "6342ac2220f239d94d94", options);
+			"PUSHER_APP_ID",
+			"PUSHER_APP_KEY",
+			"PUSHER_APP_SECRET", options);
 
 			pusher.TriggerAsync(
 			"chat",
 			"typing",
-                new { typer = typer },
-                new TriggerOptions() { SocketId = socket_id });
+			new { typer = typer },
+			new TriggerOptions() { SocketId = socket_id });
 
             return new HttpStatusCodeResult(200);
 		}

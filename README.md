@@ -1,6 +1,6 @@
-# Building a chat _who's typing_ feature using .NET and Pusher
+# Building a chat application with real-time functionality using C# .NET and Pusher
 
-This is a sample project, showing how to build the popular who's typing feature of chat apps using .NET and Pusher.
+This is a sample project, showing how to build a chat application using .NET and Pusher. This chat application possesses several popular real-time functionalities such as the who's typing feature, message delivery status and user availability notifications.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_E58012E74D3E5C5A609AA9D1CE0902B3F4FDDCE3646A4AFF843D5AF24BB9E02C_1508188979554_heychat.gif)
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
   <title>pChat &mdash; Private Chatroom</title>
@@ -149,20 +149,18 @@
             }
         });
 
-        chatChannel.bind("new_message", function(data) {
-             if ( data.receiver_id == @ViewBag.currentUser.id ) {
-                displayMessage(data);
+        chatChannel.bind("new_message", function(msg) {
+             if ( msg.receiver_id == @ViewBag.currentUser.id ) {
+                displayMessage(msg);
              }
 
-             $.post("/message_delivered/" + data.id, {
+             $.post("/message_delivered/" + msg.id, {
                 socket_id: socketId,
              });
         });
 
-        chatChannel.bind("message_delivered", function(data) {
-            var msg_id = data.id;
-
-            $('#msg-' + msg_id).find('.delivery-status').show();
+        chatChannel.bind("message_delivered", function(msg) {
+            $('#msg-' + msg.id).find('.delivery-status').show();
         });
 
         function setContactStatus( contact_id, status ) {

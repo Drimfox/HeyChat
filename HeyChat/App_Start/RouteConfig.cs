@@ -18,7 +18,7 @@ namespace HeyChat
 			routes.MapRoute(
 				name: "Login",
 				url: "login",
-				defaults: new { controller = "Login", action = "Index" }
+				defaults: new { controller = "Auth", action = "Login" }
 			);
 
             routes.MapRoute(
@@ -27,17 +27,29 @@ namespace HeyChat
                 defaults: new { controller = "Chat", action="Index"}
             );
 
-			routes.MapRoute(
-				name: "UserTyping",
-				url: "chat/typing",
-				defaults: new { controller = "Chat", action = "Typing" }
-			);
+            routes.MapRoute(
+                name: "GetContactConversations",
+                url:  "contact/conversations/{contact}",
+                defaults: new { controller = "Chat", action="ConversationWithContact", contact="" }
+            );
+
+            routes.MapRoute(
+                name: "PusherAuth",
+                url:  "pusher/auth",
+                defaults: new { controller = "Auth", action = "AuthForChannel"}
+            );
 
 			routes.MapRoute(
 				name: "SendMessage",
-                url: "chat/@{user}",
-                defaults: new { controller = "Chat", action = "SendMessage", user = "" }
+                url: "send_message",
+                defaults: new { controller = "Chat", action = "SendMessage" }
 			);
+
+            routes.MapRoute(
+                name: "MessageDelivered",
+                url: "message_delivered/{message_id}",
+                defaults: new { controller="Chat", action="MessageDelivered", message_id = ""}
+            );
         }
     }
 }

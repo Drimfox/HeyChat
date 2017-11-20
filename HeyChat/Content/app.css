@@ -8361,6 +8361,13 @@ button.close {
   height: 600px;
 }
 
+.users__bar .__no__chat__ {
+  background-color: rgba(128, 128, 128, 0.425);
+  padding: 4px;
+  font-weight: 500;
+  text-align: center;
+}
+
 .users__bar .panel-heading.users__heading {
   padding: 15px 15px;
   border-top-right-radius: 0px;
@@ -8374,6 +8381,17 @@ button.close {
 }
 
 .users__bar .panel-body.users__body .user__item {
+  text-decoration: none;
+}
+
+.users__bar .panel-body.users__body .user__item span {
+  color: #000;
+  font-weight: 600;
+  left: 7px;
+  position: relative;
+}
+
+.users__bar .panel-body.users__body .user__item li {
   position: relative;
   display: block;
   padding: 10px 10px;
@@ -8382,24 +8400,35 @@ button.close {
   border: 1px solid #ddd;
 }
 
-.users__bar .panel-body.users__body .user__item a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-  top: -14px;
-  left: 7px;
-  position: relative;
+.users__bar .panel-body.users__body .user__item li.active {
+  background-color: rgba(128, 128, 128, 0.425);
 }
 
 .users__bar .panel-body.users__body .user__item .avatar {
+  display: inline-block;
+}
+
+.users__bar .panel-body.users__body .user__item .avatar img {
   width: 35px;
   height: 35px;
   border-radius: 50%;
+}
+
+.users__bar .panel-body.users__body .user__item .status-bar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(128, 128, 128, 0.425);
   display: inline-block;
-  background-color: #999999;
+  margin: 0px 10px 0px;
+}
+
+.users__bar .panel-body.users__body .user__item .status-bar.active {
+  background-color: green;
 }
 
 .chat__body {
+  display: none;
   position: relative;
   background-color: #f2f2f2;
   height: 600px;
@@ -8414,6 +8443,14 @@ button.close {
 
 .chat__body .chat__main .__chat__ p {
   font-weight: 400;
+}
+
+.chat__body .chat__main .__chat__ p.delivery-status {
+  display: none;
+  font-size: 12px;
+  float: right;
+  top: -10px;
+  position: relative;
 }
 
 .chat__body .chat__main .__chat__.from__chat {
@@ -8442,9 +8479,17 @@ button.close {
 
 .chat__body .chat__type__body .chat__type textarea {
   background-color: inherit;
-  width: inherit;
+  width: 85%;
   padding: 10px 10px 0px;
   border: none;
+  display: inline-block;
+}
+
+.chat__body .chat__type__body .chat__type #sendMessage {
+  position: relative;
+  display: inline-block;
+  top: -15px;
+  width: 14%;
 }
 
 .chat__body .typing_display__open {

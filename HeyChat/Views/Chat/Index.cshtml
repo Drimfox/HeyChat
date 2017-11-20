@@ -41,7 +41,6 @@
                                  <img src="@Url.Content("~/Content/no_avatar.png")">
                               </div>
                               <span>@user.name</span>
-                              <div class="status-bar"></div>
                             </li>
                         </a>
                     }
@@ -80,21 +79,21 @@
         //////////// Variable Instantiation
 
             function throttle(callback, wait, context = this) {
-  let timeout = null 
-  let callbackArgs = null
-  
-  const later = () => {
-    callback.apply(context, callbackArgs)
-    timeout = null
-  }
-  
-  return function() {
-    if (!timeout) {
-      callbackArgs = arguments
-      timeout = setTimeout(later, wait)
-    }
-  }
-}
+			  let timeout = null 
+			  let callbackArgs = null
+			  
+			  const later = () => {
+			    callback.apply(context, callbackArgs)
+			    timeout = null
+			  }
+			  
+			  return function() {
+			    if (!timeout) {
+			      callbackArgs = arguments
+			      timeout = setTimeout(later, wait)
+			    }
+			  }
+			}
             
             let currentContact = null; // Holds contact currently being chatted with
             let socketId = null;
@@ -121,34 +120,6 @@
 
         const chatChannel = pusher.subscribe('presence-chat');
 
-        chatChannel.bind("pusher:subscription_succeeded", function(members) {
-            
-            members.each(function(member) {
-                setContactStatus(member.info.id, 1);
-            });
-        });
-
-        chatChannel.bind("pusher:member_added", function(member){
-          setContactStatus(member.info.id, 1);
-        });
-
-        chatChannel.bind("pusher:member_removed", function(member){
-          setContactStatus(member.info.id, 0);
-        });
-
-        chatChannel.bind("client-is-typing", function(data) {
-            if ( data.user_id == currentContact.id && data.contact_id == @ViewBag.currentUser.id  ) {
-
-                $('#typerDisplay').text( currentContact.name + ' is typing...');
-            
-                $('.chat__typing').fadeIn(100, function() {
-                    $('.chat__type__body').addClass('typing_display__open');
-                }).delay(1000).fadeOut(300, function(){
-                    $('.chat__type__body').removeClass('typing_display__open');
-                });
-            }
-        });
-
         chatChannel.bind("new_message", function(msg) {
              if ( msg.receiver_id == @ViewBag.currentUser.id ) {
                 displayMessage(msg);
@@ -163,15 +134,6 @@
             $('#msg-' + msg.id).find('.delivery-status').show();
         });
 
-        function setContactStatus( contact_id, status ) {
-            var contactObj = $('#contacts .contact-' + contact_id);
-
-            if ( status ) {
-                contactObj.find('.status-bar').addClass('active');
-            } else {
-                contactObj.find('.status-bar').removeClass('active');
-            }
-        }
 
         function displayMessage( message_obj ) {
             const msg_id = message_obj.id;
@@ -231,16 +193,6 @@
             $('#contacts .contact-' + currentContact.id).find('li').addClass('active');
             getChat(currentContact.id);
        });
-
-       //User is typing
-        var isTypingCallback = throttle(function() {
-            chatChannel.trigger("client-is-typing", {
-                user_id: @ViewBag.currentUser.id,
-                contact_id: currentContact.id,
-            });
-        }, 1000);
-
-        $('#msg_box').on('keyup',isTypingCallback);
 
         ///////////////////Sending Messages/////////////////////
         $('#sendMessage').click( function() {
